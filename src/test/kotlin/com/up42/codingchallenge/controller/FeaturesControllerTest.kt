@@ -1,4 +1,4 @@
-package com.up42.codingchallenge
+package com.up42.codingchallenge.controller
 
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
@@ -8,6 +8,11 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.http.MediaType
+import org.apache.http.HttpStatus
+import org.hamcrest.Matchers.anything
+
+
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -144,5 +149,32 @@ class FeaturesControllerTest {
                         .body("missionName[${feature.key}]", equalTo(feature.value.missionName))
                 }
             }
+    }
+
+    @Test
+    fun `should return http 400 for a given invalid feature id`() {
+        given()
+            .get("/features/dummyuuid/quicklook")
+            .then()
+            .statusCode(400)
+    }
+
+    @Test
+    fun `should return http 200 and content type image for a given valid feature id`() {
+        given()
+            .get("/features/7f23a853-76a8-4787-a2ba-fdfe93e74165/quicklook")
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+            .contentType(MediaType.IMAGE_PNG_VALUE)
+            .body(anything())
+    }
+
+    @Test
+    fun `should return http 200 for a given valid feature id`() {
+        given()
+            .get("/features/7f23a853-76a8-4787-a2ba-fdfe93e74165/quicklook")
+            .then()
+            .statusCode(200)
+
     }
 }

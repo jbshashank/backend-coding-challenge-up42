@@ -21,7 +21,7 @@ class FeatureService(@Autowired @Qualifier("resourceDataReader") var featureData
         try {
             features = featureDataReader.dataReader()
         }catch(featuresNotFoundException: FeaturesNotFoundException){
-            throw FeaturesNotFoundException(FeatureConstants.FEATURES_NOT_FOUND)
+            throw FeaturesNotFoundException()
         }
         return features;
     }
@@ -31,5 +31,4 @@ class FeatureService(@Autowired @Qualifier("resourceDataReader") var featureData
     }
 
     fun getFeatureById(searchId: UUID): Features.Feature =  getAllFeatures().filter { it.id == searchId }.first()
-
 }

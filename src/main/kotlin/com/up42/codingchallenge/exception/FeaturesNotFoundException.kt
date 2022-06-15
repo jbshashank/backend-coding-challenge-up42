@@ -1,3 +1,5 @@
 package com.up42.codingchallenge.exception
 
-class FeaturesNotFoundException(id: String): Exception("No features found")
+import com.up42.codingchallenge.constants.FeatureConstants
+
+class FeaturesNotFoundException() : Exception(FeatureConstants.FEATURES_NOT_FOUND)

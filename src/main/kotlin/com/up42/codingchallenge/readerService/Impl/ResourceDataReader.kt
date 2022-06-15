@@ -1,5 +1,6 @@
 package com.up42.codingchallenge.service.datareader
 
+
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.springframework.beans.factory.annotation.Qualifier
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service
 
 import com.up42.codingchallenge.constants.FeatureConstants
 import com.up42.codingchallenge.controller.model.Features
-import com.up42.codingchallenge.exception.FeatureNotFoundException
+import com.up42.codingchallenge.exception.FeaturesNotFoundException
 import com.up42.codingchallenge.service.readerService.DataReader
 
 
@@ -30,7 +31,7 @@ override fun dataReader(): List<Features.Feature> {
             }
         }
         .ifEmpty {
-            throw FeaturesNotFoundException(FeatureConstants.FEATURES_NOT_FOUND)
+            throw FeaturesNotFoundException()
         }
 }
 }
