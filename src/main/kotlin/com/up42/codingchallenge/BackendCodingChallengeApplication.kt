@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class BackendCodingChallengeApplication
 
 fun main(args: Array<String>) {
-    runApplication<BackendCodingChallengeApplication>(*args)
+	runApplication<BackendCodingChallengeApplication>(*args)
 }
