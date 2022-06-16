@@ -1,6 +1,7 @@
 package com.up42.codingchallenge.service
 
 import com.up42.codingchallenge.controller.model.Features
+import com.up42.codingchallenge.exception.FeatureNotFoundException
 import com.up42.codingchallenge.exception.FeaturesNotFoundException
 import com.up42.codingchallenge.repository.DataReaderRepositry
 import org.apache.tomcat.util.codec.binary.Base64
@@ -20,7 +21,7 @@ class FeatureService(@Autowired @Qualifier("resourceDataReader") var featureData
         val features: List<Features.Feature>
 
         try {
-            features = featureDataReader.dataReader()
+            features =  featureDataReader.dataReader()
             logger.debug("Reading all features from Resource Data Reader"+ features);
         }catch(featuresNotFoundException: FeaturesNotFoundException){
             throw FeaturesNotFoundException()
@@ -34,5 +35,5 @@ class FeatureService(@Autowired @Qualifier("resourceDataReader") var featureData
         return imageByteArray
     }
 
-    fun getFeatureById(searchId: UUID): Features.Feature =  getAllFeatures().filter { it.id == searchId }.first()
+    fun getFeatureById(searchId: UUID): Features.Feature =  getAllFeatures().filter { it.id == searchId }.ifEmpty { throw FeatureNotFoundException(searchId) }.first()
 }
