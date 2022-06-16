@@ -1,6 +1,5 @@
 package com.up42.codingchallenge.service
 
-import com.up42.codingchallenge.constants.FeatureConstants
 import com.up42.codingchallenge.controller.model.Features
 import com.up42.codingchallenge.exception.FeaturesNotFoundException
 import org.apache.tomcat.util.codec.binary.Base64
@@ -9,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import java.util.UUID
 
-import com.up42.codingchallenge.service.readerService.DataReader
+import com.up42.codingchallenge.repository.DataReaderRepositry
 
 
 @Service
-class FeatureService(@Autowired @Qualifier("resourceDataReader") var featureDataReader: DataReader){
+class FeatureService(@Autowired @Qualifier("resourceDataReader") var featureDataReader: DataReaderRepositry){
 
     fun getAllFeatures(): List<Features.Feature> {
         val features: List<Features.Feature>

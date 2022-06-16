@@ -1,7 +1,7 @@
-package com.up42.codingchallenge.service.readerService
+package com.up42.codingchallenge.repository
 import com.up42.codingchallenge.controller.model.Features
 
 
-interface DataReader {
+interface DataReaderRepositry {
     fun dataReader(): List<Features.Feature>
 }

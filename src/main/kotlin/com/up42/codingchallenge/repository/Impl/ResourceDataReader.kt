@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service
 import com.up42.codingchallenge.constants.FeatureConstants
 import com.up42.codingchallenge.controller.model.Features
 import com.up42.codingchallenge.exception.FeaturesNotFoundException
-import com.up42.codingchallenge.service.readerService.DataReader
+import com.up42.codingchallenge.repository.DataReaderRepositry
 
 
 @Service
 @Qualifier("resourceDataReader")
-class ResourceDataReader: DataReader {
+class ResourceDataReader: DataReaderRepositry {
 override fun dataReader(): List<Features.Feature> {
     return ClassPathResource(FeatureConstants.SOURCE_DATA_JSON).file
         .readText()
